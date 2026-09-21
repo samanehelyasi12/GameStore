@@ -1,0 +1,1 @@
+export { default as CheckoutAddressFields } from "@/components/checkout/CheckoutAddressFields";

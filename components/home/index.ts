@@ -1,0 +1,1 @@
+export { default as FeaturedSection } from "@/components/home/FeaturedSection";

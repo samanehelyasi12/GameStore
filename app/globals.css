@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+/* Theme switching: `dark:` utilities match [data-theme="dark"] elements.
+   Dark is the primary identity and the default (see root layout + theme init). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ─────────────────────────────────────────────────────────────
+   STATIC TOKENS — Tailwind v4 @theme
+   Fonts, spacing, radius, container widths, type scale, motion.
+   ───────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Fonts (loaded via next/font/local in app/fonts.ts) */
+  --font-sans: var(--font-mikhak), "Sahel", "Segoe UI", Tahoma, system-ui,
+    sans-serif;
+  --font-display: var(--font-fanavari), var(--font-mikhak), "Sahel",
+    system-ui, sans-serif;
+
+  /* Spacing — 4px base unit (MASTER §4) */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+
+  /* Radius (MASTER §6) */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-full: 9999px;
+
+  /* Container widths (MASTER §5) → max-w-page / max-w-narrow / max-w-wide */
+  --container-page: 1280px;
+  --container-narrow: 880px;
+  --container-wide: 1600px;
+
+  /* Typography — fluid type scale (MASTER §3.1) */
+  --text-display-2xl: clamp(3.5rem, 6vw + 1rem, 4.75rem);
+  --text-display-2xl--line-height: 1.05;
+  --text-display-2xl--font-weight: 700;
+
+  --text-display-xl: clamp(2.75rem, 4vw + 1rem, 3.5rem);
+  --text-display-xl--line-height: 1.1;
+  --text-display-xl--font-weight: 700;
+
+  --text-display-lg: clamp(2.25rem, 3vw + 1rem, 3rem);
+  --text-display-lg--line-height: 1.15;
+  --text-display-lg--font-weight: 700;
+
+  --text-h2: clamp(1.75rem, 2vw + 1rem, 2.25rem);
+  --text-h2--line-height: 1.25;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 1.375rem;
+  --text-h3--line-height: 1.4;
+  --text-h3--font-weight: 600;
+
+  --text-h4: 1.125rem;
+  --text-h4--line-height: 1.45;
+  --text-h4--font-weight: 600;
+
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.8;
+  --text-lg--font-weight: 400;
+
+  --text-base: 1rem;
+  --text-base--line-height: 1.7;
+  --text-base--font-weight: 400;
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.65;
+  --text-sm--font-weight: 400;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.6;
+  --text-xs--font-weight: 500;
+
+  --text-kicker: 0.75rem;
+  --text-kicker--line-height: 1.4;
+  --text-kicker--font-weight: 600;
+
+  /* Motion — durations (MASTER §13) */
+  --duration-micro: 120ms;
+  --duration-fast: 180ms;
+  --duration-base: 240ms;
+  --duration-panel: 400ms;
+  --duration-slow: 600ms;
+  --duration-cinema: 800ms;
+  --default-transition-duration: 240ms;
+
+  /* Motion — easings (MASTER §13) */
+  --ease-fast: cubic-bezier(0.2, 0, 0, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.9, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   THEME-DEPENDENT TOKENS
+   :root / [data-theme="dark"] = primary identity (MASTER §2.1)
+   [data-theme="light"]      = designed light theme (MASTER §2.2)
+   Media surfaces + image gradients stay dark-tinted in both themes.
+   ───────────────────────────────────────────────────────────── */
+
+:root,
+[data-theme="dark"] {
+  /* Surfaces & text */
+  --color-canvas: #07090e;
+  --color-surface: #0e131c;
+  --color-surface-raised: #141b27;
+  --color-media: #0e131c;
+  --color-overlay: rgba(3, 5, 9, 0.72);
+  --color-text-primary: #f2f4f8;
+  --color-text-secondary: #a9b2c1;
+  --color-text-tertiary: #6b7484;
+  --color-text-inverse: #ffffff;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Focus ring (dark → accent-500) */
+  --color-focus-ring: #4f7cf0;
+
+  /* Accent — deep blue */
+  --color-accent-400: #7e9ff5;
+  --color-accent-500: #4f7cf0;
+  --color-accent-600: #3e63db;
+  --color-accent-700: #3357c4;
+  --color-accent-800: #2a469f;
+  --color-accent-subtle: rgba(79, 124, 240, 0.14);
+
+  /* Secondary — controlled purple (minimal use) */
+  --color-purple-400: #a78bfa;
+  --color-purple-500: #8257e5;
+  --color-purple-subtle: rgba(130, 87, 229, 0.12);
+
+  /* Red accent + status */
+  --color-red-400: #f2555a;
+  --color-red-500: #e5484d;
+  --color-red-600: #d22f3a;
+  --color-red-700: #b4232e;
+  --color-red-subtle: rgba(229, 72, 77, 0.12);
+  --color-success: #3dd68c;
+  --color-warning: #f5a524;
+  --color-gold-300: #f2c879;
+  --color-gold-500: #c79a2e;
+
+  /* Approved gradients — cinematic scrims stay dark in both themes */
+  --gradient-brand: linear-gradient(135deg, #4f7cf0 0%, #8257e5 100%);
+  --gradient-hero: linear-gradient(
+    to top,
+    rgba(3, 5, 9, 0.92) 0%,
+    rgba(3, 5, 9, 0.55) 30%,
+    rgba(3, 5, 9, 0) 60%
+  );
+  --gradient-card: linear-gradient(
+    to top,
+    rgba(3, 5, 9, 0.9) 0%,
+    rgba(3, 5, 9, 0.35) 42%,
+    rgba(3, 5, 9, 0) 65%
+  );
+
+  /* Elevation — black-based shadows (MASTER §7) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.24);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.42), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.34);
+  --shadow-accent: 0 8px 28px rgba(62, 99, 219, 0.35);
+}
+
+[data-theme="light"] {
+  /* Surfaces & text — designed cold-paper theme, not inversion */
+  --color-canvas: #f3f4f8;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-overlay: rgba(15, 18, 26, 0.55);
+  --color-text-primary: #161a22;
+  --color-text-secondary: #4b5463;
+  --color-text-tertiary: #8a93a3;
+  --color-text-inverse: #ffffff;
+  --color-border-subtle: rgba(15, 18, 26, 0.1);
+  --color-border-strong: rgba(15, 18, 26, 0.2);
+
+  /* Focus ring (light → accent-600) */
+  --color-focus-ring: #3e63db;
+
+  /* Accent — luminance-tuned for AA on light */
+  --color-accent-500: #3560e0;
+  --color-accent-600: #3e63db;
+  --color-accent-700: #3357c4;
+  --color-accent-800: #2a469f;
+  --color-accent-subtle: rgba(53, 96, 224, 0.1);
+
+  /* Red + status (light) */
+  --color-red-500: #d93a3f;
+  --color-red-600: #d22f3a;
+  --color-red-700: #b4232e;
+  --color-red-subtle: rgba(217, 58, 63, 0.1);
+  --color-success: #1e8e5c;
+  --color-warning: #b9601e;
+  --color-gold-300: #c79a2e;
+  --color-gold-500: #c79a2e;
+
+  /* Elevation — ink-based softer shadows (MASTER §7) */
+  --shadow-xs: 0 1px 2px rgba(15, 18, 26, 0.06);
+  --shadow-sm: 0 2px 6px rgba(15, 18, 26, 0.06), 0 1px 2px rgba(15, 18, 26, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 18, 26, 0.1), 0 2px 8px rgba(15, 18, 26, 0.06);
+  --shadow-lg: 0 16px 40px rgba(15, 18, 26, 0.14), 0 4px 12px rgba(15, 18, 26, 0.08);
+  --shadow-xl: 0 24px 64px rgba(15, 18, 26, 0.18), 0 8px 20px rgba(15, 18, 26, 0.1);
+  --shadow-accent: 0 8px 24px rgba(53, 96, 224, 0.18);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   UTILITY REGISTRATION — @theme inline
+   Colors/shadows reference the runtime theme variables above so
+   utilities resolve the active theme at use time.
+   ───────────────────────────────────────────────────────────── */
+
+@theme inline {
+  --color-canvas: var(--color-canvas);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-media: var(--color-media);
+  --color-overlay: var(--color-overlay);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border-strong: var(--color-border-strong);
+  --color-focus-ring: var(--color-focus-ring);
+
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-600: var(--color-accent-600);
+  --color-accent-700: var(--color-accent-700);
+  --color-accent-800: var(--color-accent-800);
+  --color-accent-subtle: var(--color-accent-subtle);
+
+  --color-purple-400: var(--color-purple-400);
+  --color-purple-500: var(--color-purple-500);
+  --color-purple-subtle: var(--color-purple-subtle);
+
+  --color-red-400: var(--color-red-400);
+  --color-red-500: var(--color-red-500);
+  --color-red-600: var(--color-red-600);
+  --color-red-700: var(--color-red-700);
+  --color-red-subtle: var(--color-red-subtle);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-gold-300: var(--color-gold-300);
+  --color-gold-500: var(--color-gold-500);
+
+  --background-image-brand: var(--gradient-brand);
+  --background-image-hero: var(--gradient-hero);
+  --background-image-card: var(--gradient-card);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-accent: var(--shadow-accent);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE STYLES (MASTER §3, §11, §12)
+   ───────────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    direction: rtl;
+    text-align: start;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    background-color: var(--color-canvas);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(
+      in oklab,
+      var(--color-accent-500) 30%,
+      transparent
+    );
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+/* ── اینو ته فایل app/globals.css اضافه کن (پایین‌ترین قسمت) ── */
+
+@theme {
+  --animate-streak-a: streak-a 26s ease-in-out infinite alternate;
+  --animate-streak-b: streak-b 34s ease-in-out infinite alternate;
+  --animate-streak-c: streak-c 42s ease-in-out infinite alternate;
+
+  @keyframes streak-a {
+    from { transform: translate3d(-8%, -12%, 0); }
+    to   { transform: translate3d(10%, 14%, 0); }
+  }
+  @keyframes streak-b {
+    from { transform: translate3d(9%, 10%, 0); }
+    to   { transform: translate3d(-10%, -8%, 0); }
+  }
+  @keyframes streak-c {
+    from { transform: translate3d(-6%, 8%, 0); }
+    to   { transform: translate3d(8%, -12%, 0); }
+  }
+}

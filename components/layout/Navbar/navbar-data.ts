@@ -22,13 +22,8 @@ export const navItems: NavItem[] = [
   { kind: "link", label: "تخفیف‌ها", href: "/games?sale=true", match: "none" },
 ];
 
-export type ConsoleId = "ps5" | "ps4" | "xbox";
-
-export const consoles: { id: ConsoleId; label: string }[] = [
-  { id: "ps5", label: "PlayStation 5" },
-  { id: "ps4", label: "PlayStation 4" },
-  { id: "xbox", label: "Xbox" },
-];
+export type { ConsoleId } from "@/lib/data/consoles";
+export { consoleItems as consoles, consoleHref } from "@/lib/data/consoles";
 
 export const genres: { id: string; label: string; icon: LucideIcon }[] = [
   { id: "action", label: "اکشن", icon: Zap },
@@ -42,9 +37,7 @@ export const genres: { id: string; label: string; icon: LucideIcon }[] = [
   { id: "racing", label: "مسابقه‌ای", icon: Car },
 ];
 
-/** Adjust to match how /games reads its filters. */
-export function gamesHref(console: ConsoleId, genre?: string) {
-  const params = new URLSearchParams({ console });
-  if (genre) params.set("genre", genre);
-  return `/games?${params.toString()}`;
+/** Each genre has its own landing page — matches app/categories/[slug]. */
+export function categoryHref(genre: string) {
+  return `/categories/${genre}`;
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, Gamepad2 } from "lucide-react";
 import NavPanel from "./NavPanel";
-import { consoles, genres, gamesHref, type ConsoleId } from "./navbar-data";
+import { consoles, genres, categoryHref, consoleHref, type ConsoleId } from "./navbar-data";
 import { FOCUS, GLOW, cx } from "./navbar-styles";
 
 type CategoriesPanelProps = { open: boolean; onNavigate: () => void };
@@ -47,14 +47,14 @@ export default function CategoriesPanel({ open, onNavigate }: CategoriesPanelPro
               ژانرهای <span className="text-red-400">{current.label}</span>
             </p>
             <Link
-              href={gamesHref(active)}
+              href={consoleHref(active)}
               onClick={onNavigate}
               className={cx(
-                "flex items-center gap-1 text-xs font-semibold text-text-secondary transition-colors hover:text-red-400",
+                "flex items-center gap-1 text-xs font-semibold text-red-400 transition-colors hover:text-red-300",
                 FOCUS,
               )}
             >
-              مشاهده همه
+              خرید کنسول {current.label}
               <ArrowLeft className="size-3.5" aria-hidden />
             </Link>
           </div>
@@ -63,7 +63,7 @@ export default function CategoriesPanel({ open, onNavigate }: CategoriesPanelPro
             {genres.map(({ id, label, icon: Icon }) => (
               <li key={id}>
                 <Link
-                  href={gamesHref(active, id)}
+                  href={categoryHref(id)}
                   onClick={onNavigate}
                   className={cx(
                     "group flex h-12 items-center gap-3 rounded-md border border-border-subtle bg-canvas px-3",

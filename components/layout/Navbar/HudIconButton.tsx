@@ -18,7 +18,7 @@ const base = cx(
   "text-text-primary transition-[color,border-color,box-shadow,background-color] duration-fast ease-fast",
   "hover:border-red-500 hover:bg-red-subtle hover:text-red-400",
   `hover:${GLOW.box}`,
-  "active:scale-95 lg:size-10",
+  "active:scale-95 lg:size-9",
   FOCUS,
 );
 

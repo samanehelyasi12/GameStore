@@ -79,7 +79,7 @@ export default function CategorySlider() {
       onBlurCapture={() => setPaused(false)}
       className="mx-auto w-full max-w-page px-3 sm:px-4"
     >
-      <div className="mt-9 flex items-center justify-between">
+      <div className="mt-12 flex items-center justify-between">
         <h2 className="font-display text-h3 font-bold text-text-primary sm:text-h2">
           دسته‌بندی‌ها
         </h2>

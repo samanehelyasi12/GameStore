@@ -31,7 +31,7 @@ export default function NavbarLogo() {
         </span>
         <span
           dir="ltr"
-          className=" hidden text-[8px] font-semibold uppercase tracking-[0.32em] text-text-secondary sm:block"
+          className="  hidden text-[8px] font-semibold uppercase tracking-[0.32em] text-text-secondary sm:block"
         >
           For true gamers
         </span>

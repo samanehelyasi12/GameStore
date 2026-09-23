@@ -14,11 +14,11 @@ type DesktopNavProps = {
 };
 
 const item = cx(
-  "relative flex h-9 items-center gap-1 px-4 text-sm font-semibold text-text-secondary",
+  "relative flex h-8 items-center gap-1 px-3 text-[13px] font-semibold text-text-secondary",
   "transition-[color,background-color] duration-fast ease-fast",
   "hover:text-red-400",
   GLOW.text,
-  "after:absolute after:inset-x-4 after:bottom-0.5 after:h-px after:origin-center after:scale-x-0",
+  "after:absolute after:inset-x-3 after:bottom-0.5 after:h-px after:origin-center after:scale-x-0",
   "after:bg-red-500 after:transition-transform after:duration-fast hover:after:scale-x-100",
   FOCUS,
 );
@@ -64,7 +64,11 @@ export default function DesktopNav({
             aria-controls="navbar-categories"
             onClick={onToggleCategories}
             onPointerEnter={(e) => e.pointerType === "mouse" && onHoverCategories()}
-            className={cx(item, categoriesOpen && "text-red-400 after:scale-x-100")}
+            className={cx(
+              item,
+              (categoriesOpen || pathname.startsWith("/categories") || pathname.startsWith("/consoles")) &&
+                "text-red-400 after:scale-x-100",
+            )}
           >
             {entry.label}
             <ChevronDown

@@ -20,7 +20,7 @@ export default function NavbarActions({
   onNavigate,
 }: NavbarActionsProps) {
   return (
-    <div className="flex items-center justify-end gap-2 lg:gap-3">
+    <div className="flex items-center justify-end gap-2 lg:gap-2">
       <ThemeToggle className="hidden lg:flex" />
 
       <HudIconButton
@@ -29,14 +29,14 @@ export default function NavbarActions({
         aria-controls="navbar-search"
         onClick={onToggleSearch}
       >
-        <Search className="size-[18px]" aria-hidden />
+        <Search className="size-4" aria-hidden />
       </HudIconButton>
 
       <HudIconButton label="سبد خرید" href="/cart" badge={cartCount}>
-        <ShoppingCart className="size-[18px]" aria-hidden />
+        <ShoppingCart className="size-4" aria-hidden />
       </HudIconButton>
 
-      <span aria-hidden className="mx-1 hidden h-7 w-px bg-border-strong lg:block" />
+      <span aria-hidden className="mx-1 hidden h-6 w-px bg-border-strong lg:block" />
 
       <Link
         href="/login"
@@ -44,8 +44,8 @@ export default function NavbarActions({
         className={cx("hidden lg:block", FOCUS)}
       >
         <CyberFrame size="sm" wrapperClassName={GLOW.hover} className="bg-canvas">
-          <span className="flex h-10 items-center gap-2 px-4 text-sm font-semibold text-text-primary transition-colors duration-fast hover:text-red-400">
-            <User className="size-[18px]" aria-hidden />
+          <span className="flex h-9 items-center gap-1.5 px-3 text-[13px] font-semibold text-text-primary transition-colors duration-fast hover:text-red-400">
+            <User className="size-4" aria-hidden />
             ورود / ثبت‌نام
           </span>
         </CyberFrame>

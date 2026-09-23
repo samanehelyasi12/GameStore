@@ -39,7 +39,7 @@ export default function HeroSlider() {
   };
 
   return (
-    <div className="animate-enter-bottom mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+    <div className="animate-enter-bottom mx-auto  max-w-page px-4 sm:px-6 lg:px-8">
       <section className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl border border-border-subtle">
         {/* Slide 1 */}
         <Slide active={activeSlide === 0}>

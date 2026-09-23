@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ChevronDown, User } from "lucide-react";
 import NavPanel from "./NavPanel";
 import ThemeToggle from "./ThemeToggle";
-import { consoles, genres, gamesHref, navItems, type ConsoleId } from "./navbar-data";
+import { consoles, genres, categoryHref, consoleHref, navItems, type ConsoleId } from "./navbar-data";
 import { FOCUS, cx } from "./navbar-styles";
 
 type MobileMenuProps = { open: boolean; onNavigate: () => void };
@@ -66,11 +66,22 @@ export default function MobileMenu({ open, onNavigate }: MobileMenuProps) {
                       </button>
                     ))}
                   </div>
+                  <Link
+                    href={consoleHref(active)}
+                    onClick={onNavigate}
+                    className={cx(
+                      "mb-2 flex h-9 items-center justify-center rounded-md border border-red-500/50 text-xs font-bold text-red-400 transition-colors duration-fast hover:bg-red-subtle",
+                      FOCUS,
+                    )}
+                  >
+                    خرید کنسول {consoles.find((c) => c.id === active)?.label}
+                  </Link>
+
                   <ul className="grid grid-cols-2 gap-1.5">
                     {genres.map(({ id, label, icon: Icon }) => (
                       <li key={id}>
                         <Link
-                          href={gamesHref(active, id)}
+                          href={categoryHref(id)}
                           onClick={onNavigate}
                           className={cx(
                             "flex h-10 items-center gap-2 rounded-md bg-canvas px-3 text-xs font-semibold text-text-secondary",

@@ -1,15 +1,126 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 80" preserveAspectRatio="none">
-  <path fill="#fff" d="
-    M 30,3
-    L 120,1 L 180,4 L 260,1 L 340,5 L 420,2 L 500,4
-    L 580,1 L 660,4 L 740,2 L 820,5 L 900,2 L 970,4
-    L 985,12 L 992,24 L 980,35 L 996,47 L 984,60 L 990,70
-    L 960,76 L 880,78 L 800,76 L 720,79 L 640,77 L 560,79
-    L 480,77 L 400,80 L 320,77 L 240,79 L 160,77 L 80,79
-    L 20,77 L 8,70 L 16,60 L 4,48 L 18,36 L 6,24 L 14,12
-    Z
-    M 60,10 L 55,5 L 70,7 L 65,12 Z
-    M 940,71 L 955,77 L 935,78 L 945,73 Z
-    M 15,40 L 0,42 L 8,47 L 20,44 Z
-  "/>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1200 180"
+     preserveAspectRatio="none">
+
+  <defs>
+    <filter id="rough">
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.025 0.12"
+        numOctaves="3"
+        seed="8"
+        result="noise"/>
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="noise"
+        scale="18"
+        xChannelSelector="R"
+        yChannelSelector="G"/>
+    </filter>
+
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.15"/>
+      <stop offset="0.18" stop-color="#fff" stop-opacity="0.65"/>
+      <stop offset="0.42" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="0.62" stop-color="#fff" stop-opacity="0.95"/>
+      <stop offset="0.84" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <!-- soft paint underneath -->
+  <path
+    d="M35 91
+       C95 72 145 84 205 77
+       C275 68 330 91 395 78
+       C470 63 525 87 595 75
+       C665 63 720 87 790 76
+       C865 64 925 88 995 76
+       C1060 65 1115 82 1170 72
+       L1178 112
+       C1115 123 1060 110 995 120
+       C925 132 865 112 790 123
+       C720 134 665 112 595 125
+       C525 137 470 115 395 129
+       C330 141 275 119 205 130
+       C145 139 95 126 35 134 Z"
+    fill="#fff"
+    opacity="0.25"
+    filter="url(#rough)"
+  />
+
+  <!-- main dense brush stroke -->
+  <path
+    d="M20 76
+       C75 61 125 69 185 63
+       C250 56 305 72 370 62
+       C435 52 495 70 560 60
+       C625 50 680 70 745 59
+       C815 48 875 70 940 59
+       C1005 49 1065 67 1125 57
+       C1150 53 1170 55 1185 58
+       L1187 108
+       C1145 115 1090 105 1035 113
+       C965 123 905 105 840 116
+       C775 126 715 106 650 117
+       C585 128 525 108 460 119
+       C395 130 335 110 270 120
+       C205 130 150 111 90 119
+       C60 123 38 116 15 112 Z"
+    fill="url(#fade)"
+    filter="url(#rough)"
+  />
+
+  <!-- upper dry-brush streak -->
+  <path
+    d="M80 67
+       C180 48 250 61 340 52
+       C430 43 520 57 610 49
+       C700 41 790 58 875 48
+       C965 38 1050 54 1125 45"
+    fill="none"
+    stroke="#fff"
+    stroke-width="10"
+    stroke-linecap="round"
+    opacity="0.28"
+    filter="url(#rough)"
+  />
+
+  <!-- lower dry-brush streak -->
+  <path
+    d="M55 122
+       C145 135 220 119 310 130
+       C400 141 480 124 565 135
+       C650 146 735 126 820 137
+       C910 148 1000 129 1140 139"
+    fill="none"
+    stroke="#fff"
+    stroke-width="9"
+    stroke-linecap="round"
+    opacity="0.25"
+    filter="url(#rough)"
+  />
+
+  <!-- thin dragged paint streaks -->
+  <g fill="none" stroke="#fff" stroke-linecap="round">
+    <path d="M45 58 C150 43 225 49 330 40" stroke-width="4" opacity="0.22"/>
+    <path d="M850 137 C955 147 1040 136 1160 145" stroke-width="5" opacity="0.18"/>
+    <path d="M170 143 C260 151 320 143 410 148" stroke-width="3" opacity="0.2"/>
+    <path d="M700 40 C790 34 850 42 930 35" stroke-width="3" opacity="0.17"/>
+  </g>
+
+  <!-- small paint splashes -->
+  <g fill="#fff">
+    <circle cx="78" cy="45" r="4" opacity="0.45"/>
+    <circle cx="108" cy="137" r="3" opacity="0.35"/>
+    <circle cx="225" cy="48" r="2.5" opacity="0.5"/>
+    <circle cx="350" cy="143" r="4" opacity="0.3"/>
+    <circle cx="505" cy="43" r="3" opacity="0.35"/>
+    <circle cx="640" cy="139" r="2.5" opacity="0.4"/>
+    <circle cx="785" cy="44" r="4" opacity="0.3"/>
+    <circle cx="910" cy="143" r="3" opacity="0.45"/>
+    <circle cx="1030" cy="45" r="2.5" opacity="0.4"/>
+    <circle cx="1135" cy="128" r="4" opacity="0.3"/>
+  </g>
+
 </svg>

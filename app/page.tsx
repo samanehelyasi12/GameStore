@@ -6,7 +6,11 @@ import ConsolesSection from "@/components/home/ConsolesSection/ConsolesSection";
 import UsedConsolesSection from "@/components/home/UsedConsolesSection/UsedConsolesSection";
 import ArticlesSection from "@/components/home/ArticlesSection/ArticlesSection";
 import AboutSection from "@/components/home/AboutSection/AboutSection";
+import TrailersSection from "@/components/home/TrailersSection/TrailersSection";
+import FaqSection from "@/components/home/FaqSection/FaqSection";
 import { CategorySlider } from "@/components/home/CategorySlider";
+import HeroPickerSection from "@/components/home/HeroPickerSection/HeroPickerSection";
+
 
 export default function HomePage() {
   return (
@@ -20,6 +24,12 @@ export default function HomePage() {
       <ArticlesSection />
       <UsedConsolesSection />
       <AboutSection />
+      <TrailersSection />
+      <HeroPickerSection />
+      <FaqSection />
+      
+
+      
     </>
   );
 }

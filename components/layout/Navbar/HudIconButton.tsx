@@ -22,6 +22,24 @@ const base = cx(
   FOCUS,
 );
 
+/**
+ * Everything the component does not consume itself, ready to spread onto the
+ * `<button>`. Built by copying and dropping the consumed keys — this yields
+ * the exact same object as destructuring those keys away, but without
+ * declaring throwaway variables.
+ */
+function passthroughProps(props: HudIconButtonProps): ButtonHTMLAttributes<HTMLButtonElement> {
+  const rest: Record<string, unknown> = { ...props };
+
+  delete rest.label;
+  delete rest.children;
+  delete rest.badge;
+  delete rest.className;
+  delete rest.href;
+
+  return rest as ButtonHTMLAttributes<HTMLButtonElement>;
+}
+
 /** Round icon button (button or link) with optional counter badge. */
 export default function HudIconButton(props: HudIconButtonProps) {
   const { label, children, badge, className } = props;
@@ -52,10 +70,13 @@ export default function HudIconButton(props: HudIconButtonProps) {
     );
   }
 
-  const { label: _l, children: _c, badge: _b, className: _cn, href: _h, ...rest } =
-    props as Common & ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined };
   return (
-    <button type="button" aria-label={label} className={cx(base, className)} {...rest}>
+    <button
+      type="button"
+      aria-label={label}
+      className={cx(base, className)}
+      {...passthroughProps(props)}
+    >
       {content}
     </button>
   );

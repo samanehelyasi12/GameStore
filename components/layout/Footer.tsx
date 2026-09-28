@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  
   Send,
   Phone,
   Mail,
@@ -29,9 +28,7 @@ const SUPPORT_LINKS = [
 ];
 
 const SOCIALS = [
-
   { icon: Send, href: "https://t.me", label: "تلگرام" },
- 
 ];
 
 export default function Footer() {
@@ -73,8 +70,8 @@ export default function Footer() {
 
             <div className="flex items-center gap-2">
               {SOCIALS.map((social) => (
-                
-                <a  key={social.label}
+                <a
+                  key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"

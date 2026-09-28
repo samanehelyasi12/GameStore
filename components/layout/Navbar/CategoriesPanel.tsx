@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, Gamepad2 } from "lucide-react";
 import NavPanel from "./NavPanel";
-import { consoles, genres, categoryHref, consoleHref, type ConsoleId } from "./navbar-data";
+import { consoles, genres, consoleHref, type ConsoleId } from "./navbar-data";
+import { categoryHref } from "@/lib/data/genres";
 import { FOCUS, GLOW, cx } from "./navbar-styles";
 
 type CategoriesPanelProps = { open: boolean; onNavigate: () => void };

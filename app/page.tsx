@@ -1,6 +1,6 @@
 import HeroSlider from "@/components/home/HeroSlider";
 import NewGamesSection from "@/components/home/NewGamesSection";
-import DiscountPromoSection from "@/components/home/DiscountPromoSection"
+import DiscountPromoSection from "@/components/home/DiscountPromoSection";
 import BestSellersSection from "@/components/home/BestSellersSection/BestSellersSection";
 import ConsolesSection from "@/components/home/ConsolesSection/ConsolesSection";
 import UsedConsolesSection from "@/components/home/UsedConsolesSection/UsedConsolesSection";
@@ -10,7 +10,6 @@ import TrailersSection from "@/components/home/TrailersSection/TrailersSection";
 import FaqSection from "@/components/home/FaqSection/FaqSection";
 import { CategorySlider } from "@/components/home/CategorySlider";
 import HeroPickerSection from "@/components/home/HeroPickerSection/HeroPickerSection";
-
 
 export default function HomePage() {
   return (
@@ -27,9 +26,6 @@ export default function HomePage() {
       <TrailersSection />
       <HeroPickerSection />
       <FaqSection />
-      
-
-      
     </>
   );
 }

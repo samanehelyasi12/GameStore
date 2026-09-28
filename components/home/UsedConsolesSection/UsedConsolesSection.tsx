@@ -6,9 +6,9 @@ import Link from "next/link";
 import {
   usedConsoles,
   CONDITION_LABELS,
-  formatToman,
   discountPercent,
 } from "./used-consoles-data";
+import { formatPrice } from "@/lib/utils";
 
 /**
  * =====================================================================
@@ -139,10 +139,10 @@ function UsedConsoleCard({ console }: { console: (typeof usedConsoles)[number] }
         <div className="mt-2 flex items-center justify-between gap-2">
           <div className="flex flex-col">
             <span className="truncate text-xs font-bold text-accent-400 sm:text-sm">
-              {formatToman(console.price)}
+              {formatPrice(console.price)}
             </span>
             <span className="truncate text-[10px] text-text-tertiary line-through">
-              {formatToman(console.originalPrice)}
+              {formatPrice(console.originalPrice)}
             </span>
           </div>
           <span

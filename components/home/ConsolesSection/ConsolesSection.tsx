@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CONSOLE_TABS, CONSOLE_PRODUCTS, type ConsoleBrand, type ConsoleProduct } from "./consoles-data";
+import { formatPrice } from "@/lib/utils";
 
 /**
  * =====================================================================
@@ -147,7 +148,7 @@ function ConsoleCard({ product }: { product: ConsoleProduct }) {
         </h3>
         <div className="mt-2 flex items-center justify-between gap-2">
           <span className="truncate text-xs font-bold text-accent-400 sm:text-sm">
-            {product.price.toLocaleString("fa-IR")} تومان
+            {formatPrice(product.price)}
           </span>
           <span
             aria-hidden="true"

@@ -5,7 +5,8 @@ import { useState } from "react";
 import { ChevronDown, User } from "lucide-react";
 import NavPanel from "./NavPanel";
 import ThemeToggle from "./ThemeToggle";
-import { consoles, genres, categoryHref, consoleHref, navItems, type ConsoleId } from "./navbar-data";
+import { consoles, genres, consoleHref, navItems, type ConsoleId } from "./navbar-data";
+import { categoryHref } from "@/lib/data/genres";
 import { FOCUS, cx } from "./navbar-styles";
 
 type MobileMenuProps = { open: boolean; onNavigate: () => void };

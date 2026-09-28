@@ -98,10 +98,6 @@ export const usedConsoles: UsedConsole[] = [
   },
 ];
 
-export function formatToman(price: number) {
-  return `${price.toLocaleString("fa-IR")} تومان`;
-}
-
 export function discountPercent(price: number, originalPrice: number) {
   return Math.round(((originalPrice - price) / originalPrice) * 100);
 }

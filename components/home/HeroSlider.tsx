@@ -389,7 +389,11 @@ function DanteSlide({ active }: { active: boolean }) {
         src={VIDEO_SRC}
         muted
         playsInline
-        preload="auto"
+        // The visible slide preloads exactly as before ("auto"), so first
+        // paint and scrubbing are unchanged. While this slide is hidden the
+        // browser only fetches metadata, and it switches back to "auto" as
+        // soon as the slide becomes active again.
+        preload={active ? "auto" : "metadata"}
         onSeeked={handleSeeked}
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -451,7 +455,7 @@ function ConsoleSlide({ active }: { active: boolean }) {
         src="/images/hero/ps5-console.webp"
         alt="PlayStation 5"
         fill
-        priority
+        priority={active}
         sizes="(min-width: 1280px) 1232px, 100vw"
         className="object-cover object-center"
       />
@@ -486,7 +490,7 @@ function ConsoleSlide({ active }: { active: boolean }) {
             </p>
 
             <Link
-              href="/categories/console"
+              href="/consoles/ps5"
               className="inline-flex  items-center gap-1 -translate-y-2 text-[9px] font-medium text-blue-300 transition-colors duration-base ease-standard hover:text-blue-200 sm:text-sm"
             >
               مشاهده کنسول‌ها
@@ -547,7 +551,7 @@ function DiscountSlide({ active }: { active: boolean }) {
         src="/images/hero/games-discount.webp"
         alt="۳۰ درصد تخفیف بازی‌ها"
         fill
-        priority
+        priority={active}
         sizes="(min-width: 1280px) 1232px, 100vw"
         className="object-cover object-center"
       />
@@ -583,7 +587,7 @@ function DiscountSlide({ active }: { active: boolean }) {
           </p>
 
           <Link
-            href="/games?discount=30"
+            href="/discounts"
             className="inline-flex items-center justify-center rounded-lg bg-red-500 px-4 py-2 text-xs font-medium text-white shadow-lg transition-colors duration-base ease-standard hover:bg-red-600 sm:px-6 sm:py-3 sm:text-base"
           >
             مشاهده تخفیف‌ها

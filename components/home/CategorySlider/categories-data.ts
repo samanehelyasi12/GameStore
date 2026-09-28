@@ -1,22 +1,26 @@
+import { categoryImage, genreLabel } from "@/lib/data/genres";
+
 /**
- * Genre ids match navbar-data.ts genres — keep them in sync.
- * Put images at: public/images/categories/<id>.png
+ * Genre ids in the order the slider renders them. Labels and image paths are
+ * derived from the single source of truth in lib/data/genres, so the two
+ * files can never drift apart.
  */
 export type CategoryItem = { id: string; label: string; image: string };
 
-export const categoryItems: CategoryItem[] = [
-  { id: "adventure", label: "ماجراجویی", image: "/images/categories/adventure.webp" },
-  { id: "racing", label: "مسابقه‌ای", image: "/images/categories/racing.webp" },
-  { id: "action", label: "اکشن", image: "/images/categories/action.webp" },
-  { id: "rpg", label: "نقش‌آفرینی", image: "/images/categories/rpg.webp" },
-  { id: "horror", label: "ترسناک", image: "/images/categories/horror.webp" },
-  { id: "sports", label: "ورزشی", image: "/images/categories/sports.webp" },
-  { id: "fighting", label: "مبارزه", image: "/images/categories/fighting.webp" },
-  { id: "multiplayer", label: "چندنفره", image: "/images/categories/multiplayer.webp" },
-  { id: "open-world", label: "جهان باز", image: "/images/categories/open-world.webp" },
-];
+const CATEGORY_IDS = [
+  "adventure",
+  "racing",
+  "action",
+  "rpg",
+  "horror",
+  "sports",
+  "fighting",
+  "multiplayer",
+  "open-world",
+] as const;
 
-/** Each category has its own page at /categories/[slug]. */
-export function categoryHref(id: string) {
-  return `/categories/${id}`;
-}
+export const categoryItems: CategoryItem[] = CATEGORY_IDS.map((id) => ({
+  id,
+  label: genreLabel(id),
+  image: categoryImage(id),
+}));

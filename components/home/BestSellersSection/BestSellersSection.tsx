@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
-import { bestSellerItems, formatToman } from "./bestsellers-data";
+import AddToCartButton from "@/components/cart/AddToCartButton";
+import { formatPrice } from "@/lib/utils";
+import { bestSellerItems } from "./bestsellers-data";
 
 export default function BestSellersSection() {
   const [activeId, setActiveId] = useState(bestSellerItems[0].id);
@@ -56,17 +56,22 @@ export default function BestSellersSection() {
             </p>
 
             <div className="mt-1 flex flex-wrap items-center gap-3">
-              <p className="text-lg font-bold text-red-400 sm:text-h4">
-                {formatToman(active.price)}
+              <p className="text-lg font-bold tabular-nums text-red-400 sm:text-h4">
+                {formatPrice(active.price)}
               </p>
 
-              <Link
-                href={active.href}
-                className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-sm font-bold text-text-inverse transition-colors duration-fast ease-fast hover:bg-red-600"
-              >
-                <ShoppingCart aria-hidden className="size-4" />
-                افزودن به سبد خرید
-              </Link>
+              <AddToCartButton
+                variant="solid"
+                product={{
+                  id: active.id,
+                  slug: active.slug,
+                  title: active.title,
+                  price: active.price,
+                  compareAtPrice: null,
+                  coverImage: active.image,
+                  href: active.href,
+                }}
+              />
             </div>
           </div>
         </div>
@@ -122,8 +127,8 @@ export default function BestSellersSection() {
                       <span className="truncate text-sm font-semibold text-text-primary">
                         {item.title}
                       </span>
-                      <span className="text-xs text-text-secondary">
-                        {formatToman(item.price)}
+                      <span className="text-xs tabular-nums text-text-secondary">
+                        {formatPrice(item.price)}
                       </span>
                     </span>
                   </button>

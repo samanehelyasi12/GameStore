@@ -1,1 +1,0 @@
-export { default as OrderSummary } from "@/components/order/OrderSummary";

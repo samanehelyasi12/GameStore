@@ -1,5 +1,7 @@
 export type BestSellerItem = {
   id: string;
+  /** Canonical product slug — source of truth for `/games/[slug]`. */
+  slug: string;
   title: string;
   genres: string[];
   description: string;
@@ -12,6 +14,7 @@ export type BestSellerItem = {
 export const bestSellerItems: BestSellerItem[] = [
   {
     id: "elden-ring",
+    slug: "elden-ring",
     title: "الدن رینگ",
     genres: ["نقش‌آفرینی", "اکشن", "جهان باز"],
     description:
@@ -23,6 +26,7 @@ export const bestSellerItems: BestSellerItem[] = [
   },
   {
     id: "resident-evil-4",
+    slug: "resident-evil-4",
     title: "رزیدنت اویل ۴ ریمیک",
     genres: ["ترسناک", "اکشن", "بازمانده"],
     description:
@@ -34,6 +38,7 @@ export const bestSellerItems: BestSellerItem[] = [
   },
   {
     id: "red-dead-redemption-2",
+    slug: "red-dead-redemption-2",
     title: "رد دد ردمپشن ۲",
     genres: ["ماجراجویی", "اکشن", "جهان باز"],
     description:
@@ -45,6 +50,7 @@ export const bestSellerItems: BestSellerItem[] = [
   },
   {
     id: "god-of-war-ragnarok",
+    slug: "god-of-war-ragnarok",
     title: "گاد آو وار رگناروک",
     genres: ["اکشن", "ماجراجویی", "اسطوره‌ای"],
     description:
@@ -56,6 +62,7 @@ export const bestSellerItems: BestSellerItem[] = [
   },
   {
     id: "gta-6",
+    slug: "gta-6",
     title: "جی‌تی‌ای ۶",
     genres: ["اکشن", "جهان باز", "جنایی"],
     description:
@@ -67,6 +74,7 @@ export const bestSellerItems: BestSellerItem[] = [
   },
   {
     id: "devil-may-cry-5",
+    slug: "devil-may-cry-5",
     title: "دویل می کرای ۵",
     genres: ["اکشن", "مبارزه", "دیمون"],
     description:
@@ -78,6 +86,7 @@ export const bestSellerItems: BestSellerItem[] = [
   },
   {
     id: "final-fantasy-7-rebirth",
+    slug: "final-fantasy-7-rebirth",
     title: "فاینال فانتزی ۷ ریبرث",
     genres: ["نقش‌آفرینی", "ماجراجویی", "داستانی"],
     description:
@@ -88,7 +97,3 @@ export const bestSellerItems: BestSellerItem[] = [
     href: "/games/final-fantasy-7-rebirth",
   },
 ];
-
-export function formatToman(price: number) {
-  return `${price.toLocaleString("fa-IR")} تومان`;
-}

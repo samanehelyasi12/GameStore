@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { formatPaddedNumber } from "@/lib/utils";
 
 /**
  * =====================================================================
@@ -16,8 +17,21 @@ import Link from "next/link";
  * =====================================================================
  */
 
-// TODO: این تاریخ رو با تاریخ واقعی پایان کمپین (از بک‌اند) جایگزین کنید
-const DISCOUNT_END_DATE = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 14 * 60 * 60 * 1000);
+/**
+ * Campaign end, as an absolute ISO instant.
+ *
+ * This used to be `new Date(Date.now() + …)` evaluated at module scope. Because
+ * the server bundle and the browser bundle each evaluate it at their own load
+ * time, both sides computed a *different* deadline and the countdown digits
+ * mismatched on hydration.
+ *
+ * A fixed instant makes the deadline identical on both sides. The remaining
+ * sub-second drift of `Date.now()` is absorbed by `suppressHydrationWarning`
+ * on the digits below — the markup, classes and layout are untouched.
+ *
+ * TODO بک‌اند: این مقدار باید از API بیاید (تاریخ پایان کمپین).
+ */
+const DISCOUNT_END_DATE = "2026-10-01T00:00:00.000Z";
 
 const TRUST_ITEMS = [
   {
@@ -54,13 +68,20 @@ const TRUST_ITEMS = [
   },
 ];
 
-function useCountdown(target: Date) {
-  const [remaining, setRemaining] = useState(() => Math.max(0, target.getTime() - Date.now()));
+function useCountdown(targetIso: string) {
+  // Parsed from a constant string, so the deadline is byte-identical in the
+  // server and browser bundles (it used to be derived from `Date.now()`, which
+  // each bundle evaluated independently).
+  const target = useMemo(() => new Date(targetIso), [targetIso]);
+
+  const [remaining, setRemaining] = useState(() =>
+    Math.max(0, target.getTime() - Date.now()),
+  );
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setRemaining(Math.max(0, target.getTime() - Date.now()));
-    }, 1000);
+    const tick = () => setRemaining(Math.max(0, target.getTime() - Date.now()));
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, [target]);
 
@@ -78,9 +99,7 @@ export default function DiscountPromoSection() {
 
   return (
     <section className="mx-auto max-w-page px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-      
       <h2 className="mb-6 text-h2 flex justify-center  font-display text-text-primary">
-        
         پیشنهاد لحظه‌ای
       </h2>
 
@@ -115,7 +134,6 @@ export default function DiscountPromoSection() {
 
           {/* ساعت‌شمار + دکمه، زیر متن «۳۰٪ تخفیف» روی خودِ عکس */}
           <div className="absolute bottom-4 right-4 z-10 flex flex-wrap items-center gap-3 sm:bottom-6 sm:right-8 sm:gap-4">
-            
             <Link
               href="/discounts"
               className="inline-flex items-center justify-center rounded-lg bg-red-500 px-4 py-2.5 text-xs font-medium text-white shadow-lg transition-colors duration-base ease-standard hover:bg-red-600 sm:px-5 sm:text-sm"
@@ -125,20 +143,20 @@ export default function DiscountPromoSection() {
 
             <div className="flex items-center gap-1.5 sm:gap-2">
               {[
-
                 { value: seconds, label: "ثانیه" },
                 { value: minutes, label: "دقیقه" },
                 { value: hours, label: "ساعت" },
                 { value: days, label: "روز" },
-                
-                
               ].map((unit) => (
                 <div
                   key={unit.label}
                   className="flex w-11 flex-col items-center rounded-lg border border-white/15 bg-black/50 py-1.5 backdrop-blur-md sm:w-14 sm:py-2"
                 >
-                  <span className="text-sm font-bold text-white sm:text-lg">
-                    {unit.value.toLocaleString("fa-IR", { minimumIntegerDigits: 2 })}
+                  <span
+                    suppressHydrationWarning
+                    className="text-sm font-bold text-white sm:text-lg"
+                  >
+                    {formatPaddedNumber(unit.value)}
                   </span>
                   <span className="text-[9px] text-white/60 sm:text-[10px]">
                     {unit.label}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CategoryItem } from "./categories-data";
-import { categoryHref } from "./categories-data";
+import { categoryHref } from "@/lib/data/genres";
 
 /**
  * The source images already contain their own frame + label, so this

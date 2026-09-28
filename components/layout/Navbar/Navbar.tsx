@@ -10,15 +10,15 @@ import MobileMenu from "./MobileMenu";
 import NavbarActions from "./NavbarActions";
 import NavbarLogo from "./NavbarLogo";
 import SearchPanel from "./SearchPanel";
+import { useCart } from "@/components/cart/CartProvider";
 import { FOCUS, GLOW, cx } from "./navbar-styles";
 
 type Panel = "categories" | "search" | "mobile" | null;
 
-type NavbarProps = { cartCount?: number };
-
-export default function Navbar({ cartCount = 0 }: NavbarProps) {
+export default function Navbar() {
   const [panel, setPanel] = useState<Panel>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const { totals } = useCart();
 
   const close = () => setPanel(null);
   const toggle = (next: Exclude<Panel, null>) =>
@@ -96,7 +96,7 @@ export default function Navbar({ cartCount = 0 }: NavbarProps) {
             <NavbarLogo />
 
             <NavbarActions
-              cartCount={cartCount}
+              cartCount={totals.count}
               searchOpen={panel === "search"}
               onToggleSearch={() => toggle("search")}
               onNavigate={close}

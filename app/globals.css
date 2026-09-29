@@ -317,6 +317,25 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* Printing a receipt from the account panel: drop the site chrome and
+     flatten the dark surfaces onto white paper. */
+  @media print {
+    body {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    header,
+    footer,
+    nav {
+      display: none !important;
+    }
+
+    main {
+      padding: 0 !important;
+    }
+  }
 }
 /* ── اینو ته فایل app/globals.css اضافه کن (پایین‌ترین قسمت) ── */
 

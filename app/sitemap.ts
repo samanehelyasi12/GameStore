@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/data";
 import { products } from "@/lib/data/products";
 import { consoleItems, consoleHref } from "@/lib/data/consoles";
+import { ALL_CONSOLE_PRODUCTS } from "@/components/home/ConsolesSection/consoles-data";
+import { usedConsoles } from "@/components/home/UsedConsolesSection/used-consoles-data";
 import { categoryItems } from "@/components/home/CategorySlider/categories-data";
 import { articles } from "@/components/home/ArticlesSection/articles-data";
 
@@ -26,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/discounts", changeFrequency: "daily", priority: 0.9 },
     { path: "/categories", changeFrequency: "weekly", priority: 0.8 },
     { path: "/consoles", changeFrequency: "weekly", priority: 0.8 },
+    { path: "/controllers", changeFrequency: "weekly", priority: 0.8 },
     { path: "/used-consoles", changeFrequency: "weekly", priority: 0.7 },
     { path: "/articles", changeFrequency: "weekly", priority: 0.7 },
     { path: "/faq", changeFrequency: "monthly", priority: 0.6 },
@@ -69,6 +72,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
+    });
+  }
+
+  // Console product pages
+  for (const product of ALL_CONSOLE_PRODUCTS) {
+    entries.push({
+      url: new URL(product.href, siteUrl).toString(),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    });
+  }
+
+  // Used console product pages
+  for (const item of usedConsoles) {
+    entries.push({
+      url: new URL(item.href, siteUrl).toString(),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.6,
     });
   }
 

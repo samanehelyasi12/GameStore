@@ -3,6 +3,7 @@ import NewGamesSection from "@/components/home/NewGamesSection";
 import DiscountPromoSection from "@/components/home/DiscountPromoSection";
 import BestSellersSection from "@/components/home/BestSellersSection/BestSellersSection";
 import ConsolesSection from "@/components/home/ConsolesSection/ConsolesSection";
+import ControllersSection from "@/components/home/ControllersSection/ControllersSection";
 import UsedConsolesSection from "@/components/home/UsedConsolesSection/UsedConsolesSection";
 import ArticlesSection from "@/components/home/ArticlesSection/ArticlesSection";
 import AboutSection from "@/components/home/AboutSection/AboutSection";
@@ -20,6 +21,7 @@ export default function HomePage() {
       <DiscountPromoSection />
       <BestSellersSection />
       <ConsolesSection />
+      <ControllersSection />
       <ArticlesSection />
       <UsedConsolesSection />
       <AboutSection />

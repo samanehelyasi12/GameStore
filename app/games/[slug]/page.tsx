@@ -5,6 +5,7 @@ import { Check, Headphones, ShieldCheck, Star, Zap } from "lucide-react";
 import Image from "next/image";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import AddToCartButton from "@/components/cart/AddToCartButton";
+import ProductCard from "@/components/games/ProductCard";
 import { getProduct, genreLabels, products } from "@/lib/data/products";
 import { discountPercent, formatNumber } from "@/lib/utils";
 import { FOCUS, cx } from "@/components/layout/Navbar/navbar-styles";
@@ -194,30 +195,8 @@ export default async function GameDetailPage({ params }: GameDetailPageProps) {
 
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {related.map((item) => (
-                <li key={item.id}>
-                  <Link
-                    href={`/games/${item.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface/60 transition-[border-color,transform] duration-base ease-standard hover:-translate-y-1 hover:border-red-500/50"
-                  >
-                    <span className="relative block aspect-[2/3] overflow-hidden bg-media">
-                      <Image
-                        src={item.coverImage}
-                        alt=""
-                        fill
-                        sizes="(min-width: 640px) 280px, 45vw"
-                        className="object-cover transition-transform duration-slow ease-standard group-hover:scale-105"
-                      />
-                    </span>
-                    <span className="flex flex-1 flex-col gap-1 p-3">
-                      <span className="truncate text-sm font-semibold text-text-primary">
-                        {item.title}
-                      </span>
-                      <span className="mt-auto text-sm font-bold tabular-nums text-red-400">
-                        {formatNumber(item.price)}{" "}
-                        <span className="text-[11px] font-medium text-text-tertiary">تومان</span>
-                      </span>
-                    </span>
-                  </Link>
+                <li key={item.id} className="h-full">
+                  <ProductCard product={item} />
                 </li>
               ))}
             </ul>

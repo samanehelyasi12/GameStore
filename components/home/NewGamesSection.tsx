@@ -1,11 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import AddToCartButton from "@/components/cart/AddToCartButton";
-import { formatPrice } from "@/lib/utils";
-import { products, type Product } from "@/lib/data/products";
+import ProductCard from "@/components/games/ProductCard";
+import { products } from "@/lib/data/products";
 
 /**
  * =====================================================================
@@ -13,32 +11,12 @@ import { products, type Product } from "@/lib/data/products";
  * ---------------------------------------------------------------------
  * - متن + دکمه «مشاهده همه» سمت راست (لینک به فروشگاه: /games)
  * - خط جداکننده عمودی بین متن و کارت‌ها
- * - ۹ کارت شیشه‌ای بازی در یک اسلایدر افقی (CSS scroll-snap، بدون
- *   کتابخانه خارجی)؛ در دسکتاپ تقریباً ۴ تا هم‌زمان دیده می‌شن.
- * - هر کارت فقط: عکس (بدون بج/قلب روش)، اسم بازی، قیمت + آیکن خرید.
+ * - کارت‌ها در یک اسلایدر افقی (CSS scroll-snap، بدون کتابخانه خارجی)
  *
- * داده از «کاتالوگ واحد محصولات» خوانده می‌شود تا عنوان کارت، قیمت و
- * صفحه‌ی مقصد همگی یکی باشند.
- * TODO(backend): همین نگاشت را با fetch از API جایگزین کنید.
+ * کارت از `ProductCard` گرفته می‌شود — همان کارتی که فروشگاه و صفحات
+ * دسته‌بندی استفاده می‌کنند، پس ظاهر کارت در کل سایت یکی است.
  * =====================================================================
  */
-
-/**
- * نمایش مختصرِ یک محصول برای کارت این اسلایدر. مشتق‌شده از `Product` تا
- * مدل داده‌ی این بخش با کاتالوگ اصلی ناهم‌خوان نباشد.
- */
-type NewGameCard = Pick<Product, "id" | "slug" | "title" | "price" | "coverImage"> & {
-  href: string;
-};
-
-const newGameCards: NewGameCard[] = products.map((product) => ({
-  id: product.id,
-  slug: product.slug,
-  title: product.title,
-  price: product.price,
-  coverImage: product.coverImage,
-  href: `/games/${product.slug}`,
-}));
 
 export default function NewGamesSection() {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -106,55 +84,12 @@ export default function NewGamesSection() {
             ref={scrollerRef}
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {newGameCards.map((game) => (
-              <GameCard key={game.id} game={game} />
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} layout="rail" />
             ))}
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function GameCard({ game }: { game: NewGameCard }) {
-  return (
-    <Link
-      href={game.href}
-      data-card
-      className="group w-[calc(50%-8px)] shrink-0 snap-start overflow-hidden rounded-xl border border-border-subtle bg-surface/60 shadow-lg backdrop-blur-xl transition-all duration-base ease-standard hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-accent sm:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)]"
-    >
-      <div className="relative aspect-square w-full overflow-hidden">
-        <Image
-          src={game.coverImage}
-          alt={game.title}
-          fill
-          sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
-          className="object-cover transition-transform duration-slow ease-standard group-hover:scale-105"
-        />
-      </div>
-
-      <div className="p-3">
-        <h3 className="truncate text-sm font-medium text-text-primary">
-          {game.title}
-        </h3>
-        <div className="mt-2 flex items-center justify-between gap-2">
-          <span className="truncate text-xs font-bold text-accent-400 sm:text-sm">
-            {formatPrice(game.price)}
-          </span>
-          <AddToCartButton
-            variant="icon"
-            product={{
-              id: game.id,
-              slug: game.slug,
-              title: game.title,
-              price: game.price,
-              compareAtPrice: null,
-              coverImage: game.coverImage,
-              href: game.href,
-            }}
-          />
-        </div>
-      </div>
-    </Link>
   );
 }

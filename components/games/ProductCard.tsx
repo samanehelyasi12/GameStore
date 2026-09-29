@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Star } from "lucide-react";
 import AddToCartButton from "@/components/cart/AddToCartButton";
-import { discountPercent, formatNumber } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 import type { Product } from "@/lib/data/products";
-import { genreLabels } from "@/lib/data/products";
 import { cx } from "@/components/layout/Navbar/navbar-styles";
 
 type ProductCardProps = {
@@ -27,86 +25,47 @@ function toAddable(product: Product) {
   };
 }
 
-/** Game card — MASTER §9.5 (2:3 poster, scrim, sale badge, hover CTA). */
+/**
+ * The single game card for the whole site.
+ *
+ * Home (`NewGamesSection`) is the master design: glass card, square cover,
+ * name, price and the add-to-cart icon. Shop / category / discount pages use
+ * this same component so a game looks identical everywhere.
+ */
 export default function ProductCard({ product, layout = "grid" }: ProductCardProps) {
-  const percent = product.compareAtPrice
-    ? discountPercent(product.price, product.compareAtPrice)
-    : 0;
-
   return (
-    <article
+    <Link
+      href={`/games/${product.slug}`}
+      data-card={layout === "rail" ? true : undefined}
       className={cx(
-        "group flex flex-col overflow-hidden rounded-xl border border-border-subtle bg-surface/60 backdrop-blur-xl",
-        "transition-[border-color,box-shadow,transform] duration-base ease-standard",
-        "hover:-translate-y-1 hover:border-red-500/50 hover:shadow-md",
-        layout === "grid" ? "w-full" : "w-[calc(50%-8px)] shrink-0 sm:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)]",
+        "group overflow-hidden rounded-xl border border-border-subtle bg-surface/60 shadow-lg backdrop-blur-xl",
+        "transition-all duration-base ease-standard hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-accent",
+        layout === "grid"
+          ? "flex h-full w-full flex-col"
+          : "w-[calc(50%-8px)] shrink-0 snap-start sm:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)]",
       )}
     >
-      <Link
-        href={`/games/${product.slug}`}
-        className="relative block aspect-[2/3] w-full overflow-hidden bg-media"
-        tabIndex={-1}
-        aria-hidden
-      >
+      <div className="relative aspect-square w-full overflow-hidden">
         <Image
           src={product.coverImage}
-          alt=""
+          alt={product.title}
           fill
-          sizes="(min-width: 1024px) 260px, (min-width: 640px) 33vw, 50vw"
+          sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
           className="object-cover transition-transform duration-slow ease-standard group-hover:scale-105"
         />
+      </div>
 
-        <span
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 h-1/3"
-          style={{ backgroundImage: "var(--gradient-card)" }}
-        />
-
-        {/* بج تخفیف */}
-        {percent > 0 ? (
-          <span className="absolute start-2 top-2 rounded-full bg-red-500 px-2 py-0.5 text-[11px] font-bold text-white">
-            ٪{formatNumber(percent)} تخفیف
+      <div className="p-3">
+        <h3 className="truncate text-sm font-medium text-text-primary">
+          {product.title}
+        </h3>
+        <div className="mt-2 flex items-center justify-between gap-2">
+          <span className="truncate text-xs font-bold text-accent-400 sm:text-sm">
+            {formatPrice(product.price)}
           </span>
-        ) : null}
-
-        {/* امتیاز */}
-        <span className="absolute end-2 top-2 flex items-center gap-1 rounded-full border border-border-subtle bg-canvas/80 px-2 py-0.5 text-[11px] font-bold tabular-nums text-text-primary">
-          <Star className="size-3 text-gold-500" aria-hidden />
-          {formatNumber(product.rating)}
-        </span>
-      </Link>
-
-      <div className="flex flex-1 flex-col gap-2 p-3">
-        <div>
-          <h3 className="truncate text-sm font-semibold text-text-primary">
-            <Link
-              href={`/games/${product.slug}`}
-              className="transition-colors duration-fast hover:text-red-400"
-            >
-              {product.title}
-            </Link>
-          </h3>
-          <p className="mt-1 truncate text-xs text-text-tertiary">
-            {product.genres.map((g) => genreLabels[g] ?? g).join(" · ")}
-          </p>
-        </div>
-
-        <div className="mt-auto flex items-end justify-between gap-2">
-          <div className="min-w-0">
-            {product.compareAtPrice ? (
-              <p className="text-xs text-text-tertiary line-through">
-                {formatNumber(product.compareAtPrice)}
-              </p>
-            ) : null}
-            <p className="truncate text-sm font-bold tabular-nums text-red-400 sm:text-base">
-              {formatNumber(product.price)}{" "}
-              <span className="text-[11px] font-medium text-text-tertiary">تومان</span>
-            </p>
-          </div>
-
           <AddToCartButton variant="icon" product={toAddable(product)} />
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

@@ -11,6 +11,7 @@ import {
   siteUrl,
 } from "@/lib/data";
 import { ThemeProvider } from "@/lib/theme";
+import { AuthProvider } from "@/components/auth/AuthProvider";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { OrdersProvider } from "@/components/order/OrdersProvider";
 import { fontVariables } from "./fonts";
@@ -97,14 +98,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <ThemeProvider>
-          <CartProvider>
-            <OrdersProvider>
-              <BackgroundFX />
-              <Navbar />
-              <main>{children}</main>
-              <Footer />
-            </OrdersProvider>
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <OrdersProvider>
+                <BackgroundFX />
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+              </OrdersProvider>
+            </CartProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

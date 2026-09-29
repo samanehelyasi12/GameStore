@@ -9,7 +9,6 @@ import {
   usedConsoles,
 } from "@/components/home/UsedConsolesSection/used-consoles-data";
 import { formatPrice } from "@/lib/utils";
-import { FOCUS, cx } from "@/components/layout/Navbar/navbar-styles";
 
 export const metadata: Metadata = { title: "کنسول استوک" };
 
@@ -67,7 +66,12 @@ export default function UsedConsolesPage() {
                 <div className="flex flex-1 flex-col gap-3 p-5">
                   <div>
                     <h2 className="font-display text-base font-bold text-text-primary">
-                      {item.name}
+                      <Link
+                        href={item.href}
+                        className="transition-colors duration-fast hover:text-accent-400"
+                      >
+                        {item.name}
+                      </Link>
                     </h2>
                     <p className="mt-1 text-xs text-text-tertiary">
                       سلامت ظاهری:{" "}
@@ -86,26 +90,13 @@ export default function UsedConsolesPage() {
                     </li>
                   </ul>
 
-                  <div className="mt-auto flex items-end justify-between gap-3 border-t border-border-subtle pt-4">
-                    <div>
-                      <p className="text-xs text-text-tertiary line-through">
-                        {formatPrice(item.originalPrice)}
-                      </p>
-                      <p className="font-display text-base font-bold tabular-nums text-red-400">
-                        {formatPrice(item.price)}
-                      </p>
-                    </div>
-
-                    <Link
-                      href="/contact"
-                      className={cx(
-                        "flex h-10 items-center justify-center rounded-lg border border-border-strong px-4 text-xs font-bold text-text-primary",
-                        "transition-colors duration-fast hover:border-red-500/60 hover:text-red-400",
-                        FOCUS,
-                      )}
-                    >
-                      استعلام قیمت
-                    </Link>
+                  <div className="mt-auto flex items-end gap-3 border-t border-border-subtle pt-4">
+                    <p className="text-xs text-text-tertiary line-through">
+                      {formatPrice(item.originalPrice)}
+                    </p>
+                    <p className="font-display text-base font-bold tabular-nums text-red-400">
+                      {formatPrice(item.price)}
+                    </p>
                   </div>
                 </div>
               </article>

@@ -79,7 +79,7 @@ export const bestSellerItems: BestSellerItem[] = [
     genres: ["اکشن", "مبارزه", "دیمون"],
     description:
       "شهر رد گریو زیر ریشه‌های شیطانی یک درخت هزارساله در حال نابودی است. دانته، نرو و وی باید دست به دست هم بدهند تا نسل بشر را از فروپاشی نجات دهند.",
-    thumb: "/images/bestsellers/devil-may-cry-5-thumb.webp",
+    thumb: "/images/bestsellers/devil-may-cry-5-thumb.jpg",
     image: "/images/bestsellers/devil-may-cry-5.webp",
     price: 899000,
     href: "/games/devil-may-cry-5",

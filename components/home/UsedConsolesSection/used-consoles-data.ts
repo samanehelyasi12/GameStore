@@ -33,7 +33,7 @@ export const usedConsoles: UsedConsole[] = [
     warrantyMonths: 6,
     price: 21900000,
     originalPrice: 28900000,
-    image: "/images/used-consoles/used-ps5-1.webp",
+    image: "/images/used-consoles/ps5_stardarn.webp",
     href: "/used-consoles/used-ps5-1",
   },
   {
@@ -45,7 +45,7 @@ export const usedConsoles: UsedConsole[] = [
     warrantyMonths: 3,
     price: 18500000,
     originalPrice: 25900000,
-    image: "/images/used-consoles/used-ps5-2.webp",
+    image: "/images/used-consoles/ps5_digital.webp",
     href: "/used-consoles/used-ps5-2",
   },
   {
@@ -57,7 +57,7 @@ export const usedConsoles: UsedConsole[] = [
     warrantyMonths: 3,
     price: 9900000,
     originalPrice: 16900000,
-    image: "/images/used-consoles/used-ps4-1.webp",
+    image: "/images/used-consoles/ps4_pro.webp",
     href: "/used-consoles/used-ps4-1",
   },
   {
@@ -69,7 +69,7 @@ export const usedConsoles: UsedConsole[] = [
     warrantyMonths: 6,
     price: 22900000,
     originalPrice: 29900000,
-    image: "/images/used-consoles/used-xbox-1.webp",
+    image: "/images/used-consoles/xbox_x.webp",
     href: "/used-consoles/used-xbox-1",
   },
   {
@@ -81,7 +81,7 @@ export const usedConsoles: UsedConsole[] = [
     warrantyMonths: 1,
     price: 7200000,
     originalPrice: 12900000,
-    image: "/images/used-consoles/used-ps4-2.webp",
+    image: "/images/used-consoles/ps4_slim.webp",
     href: "/used-consoles/used-ps4-2",
   },
   {
@@ -93,7 +93,7 @@ export const usedConsoles: UsedConsole[] = [
     warrantyMonths: 3,
     price: 13900000,
     originalPrice: 18900000,
-    image: "/images/used-consoles/used-xbox-2.webp",
+    image: "/images/used-consoles/xbox_s.webp",
     href: "/used-consoles/used-xbox-2",
   },
 ];

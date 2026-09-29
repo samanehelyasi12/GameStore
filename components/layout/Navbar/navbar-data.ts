@@ -20,6 +20,7 @@ export const navItems: NavItem[] = [
   { kind: "link", label: "خانه", href: "/", match: "exact" },
   { kind: "link", label: "فروشگاه", href: "/games", match: "prefix" },
   { kind: "categories", label: "دسته‌بندی‌ها" },
+  { kind: "link", label: "دسته‌های بازی", href: "/controllers", match: "prefix" },
   { kind: "link", label: "تخفیف‌ها", href: "/discounts", match: "prefix" },
 ];
 

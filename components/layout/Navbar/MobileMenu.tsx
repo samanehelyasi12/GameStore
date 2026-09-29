@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown, User } from "lucide-react";
+import AccountMenu from "./AccountMenu";
 import NavPanel from "./NavPanel";
 import ThemeToggle from "./ThemeToggle";
+import { useAuth } from "@/components/auth/AuthProvider";
 import { consoles, genres, consoleHref, navItems, type ConsoleId } from "./navbar-data";
 import { categoryHref } from "@/lib/data/genres";
 import { FOCUS, cx } from "./navbar-styles";
@@ -16,6 +18,28 @@ const row = cx(
   "transition-colors duration-fast hover:bg-red-subtle hover:text-red-400",
   FOCUS,
 );
+
+/** Mobile "login" CTA — only while nobody is signed in. */
+function SignedOutButton({ onNavigate }: { onNavigate: () => void }) {
+  const { user, ready } = useAuth();
+
+  if (!ready || user) return null;
+
+  return (
+    <Link
+      href="/login"
+      onClick={onNavigate}
+      className={cx(
+        "flex h-10 flex-1 items-center justify-center gap-2 rounded-md bg-red-600 text-sm font-bold text-white",
+        "transition-colors duration-fast hover:bg-red-500",
+        FOCUS,
+      )}
+    >
+      <User aria-hidden className="size-4" />
+      ورود / ثبت‌نام
+    </Link>
+  );
+}
 
 export default function MobileMenu({ open, onNavigate }: MobileMenuProps) {
   const [catOpen, setCatOpen] = useState(false);
@@ -103,18 +127,8 @@ export default function MobileMenu({ open, onNavigate }: MobileMenuProps) {
         )}
 
         <div className="mt-2 flex items-center justify-between gap-3 border-t border-border-subtle pt-3">
-          <Link
-            href="/login"
-            onClick={onNavigate}
-            className={cx(
-              "flex h-10 flex-1 items-center justify-center gap-2 rounded-md bg-red-600 text-sm font-bold text-white",
-              "transition-colors duration-fast hover:bg-red-500",
-              FOCUS,
-            )}
-          >
-            <User aria-hidden className="size-4" />
-            ورود / ثبت‌نام
-          </Link>
+          <SignedOutButton onNavigate={onNavigate} />
+          <AccountMenu onNavigate={onNavigate} />
           <ThemeToggle />
         </div>
       </nav>

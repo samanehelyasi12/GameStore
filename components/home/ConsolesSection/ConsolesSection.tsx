@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { CONSOLE_TABS, CONSOLE_PRODUCTS, type ConsoleBrand, type ConsoleProduct } from "./consoles-data";
-import { formatPrice } from "@/lib/utils";
+import { CONSOLE_TABS, CONSOLE_PRODUCTS, type ConsoleBrand } from "./consoles-data";
+import ConsoleCard from "@/components/consoles/ConsoleCard";
 
 /**
  * =====================================================================
@@ -116,54 +115,11 @@ export default function ConsolesSection() {
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {products.map((product) => (
-              <ConsoleCard key={product.id} product={product} />
+              <ConsoleCard key={product.id} product={product} href={product.href} />
             ))}
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function ConsoleCard({ product }: { product: ConsoleProduct }) {
-  return (
-    <Link
-      href={product.href}
-      data-card
-      className="group w-[calc(50%-8px)] shrink-0 snap-start overflow-hidden rounded-xl border border-border-subtle bg-surface/60 shadow-lg backdrop-blur-xl transition-all duration-base ease-standard hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-accent sm:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)]"
-    >
-      <div className="relative aspect-square w-full overflow-hidden">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
-          className="object-cover transition-transform duration-slow ease-standard group-hover:scale-105"
-        />
-      </div>
-
-      <div className="p-3">
-        <h3 className="truncate text-sm font-medium text-text-primary">
-          {product.name}
-        </h3>
-        <div className="mt-2 flex items-center justify-between gap-2">
-          <span className="truncate text-xs font-bold text-accent-400 sm:text-sm">
-            {formatPrice(product.price)}
-          </span>
-          <span
-            aria-hidden="true"
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-500 text-white transition-colors duration-base ease-standard group-hover:bg-accent-600"
-          >
-            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-              />
-            </svg>
-          </span>
-        </div>
-      </div>
-    </Link>
   );
 }

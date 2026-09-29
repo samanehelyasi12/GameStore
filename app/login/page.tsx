@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import { AuthShell, LoginForm } from "@/components/auth";
+import LoginClient from "@/components/auth/LoginClient";
 
 export const metadata: Metadata = {
   title: "ورود به حساب کاربری",
@@ -17,23 +16,7 @@ export default function LoginPage() {
       <Breadcrumbs items={[{ label: "ورود" }]} />
 
       <section className="mx-auto w-full max-w-page px-3 pb-16 sm:px-4">
-        <AuthShell
-          title="ورود به حساب کاربری"
-          subtitle="برای ادامه خرید وارد حساب خودت شو."
-          footer={
-            <>
-              حساب کاربری نداری؟{" "}
-              <Link
-                href="/register"
-                className="font-semibold text-red-400 transition-colors duration-fast hover:text-red-300"
-              >
-                ثبت‌نام
-              </Link>
-            </>
-          }
-        >
-          <LoginForm />
-        </AuthShell>
+        <LoginClient />
       </section>
     </>
   );
